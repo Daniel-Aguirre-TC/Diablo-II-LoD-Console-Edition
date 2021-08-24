@@ -1,0 +1,13 @@
+C:\Users\Second-Desktop\repos\DiabloLoD-ConsoleEdition\DiabloLoD-ConsoleEdition\bin\Debug\netcoreapp3.1\DiabloLoD-ConsoleEdition.exe
+C:\Users\Second-Desktop\repos\DiabloLoD-ConsoleEdition\DiabloLoD-ConsoleEdition\bin\Debug\netcoreapp3.1\DiabloLoD-ConsoleEdition.deps.json
+C:\Users\Second-Desktop\repos\DiabloLoD-ConsoleEdition\DiabloLoD-ConsoleEdition\bin\Debug\netcoreapp3.1\DiabloLoD-ConsoleEdition.runtimeconfig.json
+C:\Users\Second-Desktop\repos\DiabloLoD-ConsoleEdition\DiabloLoD-ConsoleEdition\bin\Debug\netcoreapp3.1\DiabloLoD-ConsoleEdition.runtimeconfig.dev.json
+C:\Users\Second-Desktop\repos\DiabloLoD-ConsoleEdition\DiabloLoD-ConsoleEdition\bin\Debug\netcoreapp3.1\DiabloLoD-ConsoleEdition.dll
+C:\Users\Second-Desktop\repos\DiabloLoD-ConsoleEdition\DiabloLoD-ConsoleEdition\bin\Debug\netcoreapp3.1\DiabloLoD-ConsoleEdition.pdb
+C:\Users\Second-Desktop\repos\DiabloLoD-ConsoleEdition\DiabloLoD-ConsoleEdition\obj\Debug\netcoreapp3.1\DiabloLoD-ConsoleEdition.csproj.AssemblyReference.cache
+C:\Users\Second-Desktop\repos\DiabloLoD-ConsoleEdition\DiabloLoD-ConsoleEdition\obj\Debug\netcoreapp3.1\DiabloLoD-ConsoleEdition.AssemblyInfoInputs.cache
+C:\Users\Second-Desktop\repos\DiabloLoD-ConsoleEdition\DiabloLoD-ConsoleEdition\obj\Debug\netcoreapp3.1\DiabloLoD-ConsoleEdition.AssemblyInfo.cs
+C:\Users\Second-Desktop\repos\DiabloLoD-ConsoleEdition\DiabloLoD-ConsoleEdition\obj\Debug\netcoreapp3.1\DiabloLoD-ConsoleEdition.csproj.CoreCompileInputs.cache
+C:\Users\Second-Desktop\repos\DiabloLoD-ConsoleEdition\DiabloLoD-ConsoleEdition\obj\Debug\netcoreapp3.1\DiabloLoD-ConsoleEdition.dll
+C:\Users\Second-Desktop\repos\DiabloLoD-ConsoleEdition\DiabloLoD-ConsoleEdition\obj\Debug\netcoreapp3.1\DiabloLoD-ConsoleEdition.pdb
+C:\Users\Second-Desktop\repos\DiabloLoD-ConsoleEdition\DiabloLoD-ConsoleEdition\obj\Debug\netcoreapp3.1\DiabloLoD-ConsoleEdition.genruntimeconfig.cache
