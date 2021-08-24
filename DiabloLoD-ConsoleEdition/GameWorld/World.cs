@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using DiabloLoD_ConsoleEdition.UserCommands;
 
 namespace DiabloLoD_ConsoleEdition.GameWorld
 {
@@ -8,17 +9,19 @@ namespace DiabloLoD_ConsoleEdition.GameWorld
     {
         private List<Location> locations = new List<Location>();
 
-        public void AddLocation(int xCoordinate, int yCoordinate, string name, string description, string[] locationOptions)
+        public void AddLocation(int xCoordinate, int yCoordinate, string name, string description, List<Commands> commands)
         {
             Location location = new Location();
             location.xCoordinate = xCoordinate;
             location.yCoordinate = yCoordinate;
             location.name = name;
             location.description = description;
-            location.options = locationOptions;
+            location.locationCommands = commands;
             
             locations.Add(location);
         }
+
+
 
         public Location LocationAt(int xCoordinate, int yCoordinate)
         {

@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 using DiabloLoD_ConsoleEdition.GameWorld;
+using DiabloLoD_ConsoleEdition.UserCommands;
 
 namespace DiabloLoD_ConsoleEdition
 {
     public static class ConsoleHandler
     {
-        static List<string> optionsBeingDisplayed = new List<string>();
+        static List<Commands> commandsBeingDisplayed = new List<Commands>();
         static List<string> stringsBeingDisplayed = new List<string>();
         //padding values for drawing the gui
         static int namePadding = 24;
@@ -48,18 +49,19 @@ namespace DiabloLoD_ConsoleEdition
             DrawPage();
         }
 
+
         // pass currentlocation to show the optionList for that location.
         public static void NewOptionList(Location currentLocation)
         {
-            NewOptionList(currentLocation.options);
+            NewOptionList(currentLocation.locationCommands);
         }
         // provide options directly
-        public static void NewOptionList(string[] options)
+        public static void NewOptionList(List<Commands> commands)
         {
-            optionsBeingDisplayed.Clear();
-            foreach(string option in options)
+            commandsBeingDisplayed.Clear();
+            foreach(Commands command in commands)
             {
-                optionsBeingDisplayed.Add(option);
+                commandsBeingDisplayed.Add(command);
             }
         }
 
@@ -189,7 +191,7 @@ namespace DiabloLoD_ConsoleEdition
 
             if(!reprintForInvalidSelection)
             {
-                InputHandler.GetUserInput(optionsBeingDisplayed.ToArray());
+                InputHandler.GetUserInput(commandsBeingDisplayed.ToArray());
             }
 
 
@@ -198,9 +200,9 @@ namespace DiabloLoD_ConsoleEdition
         static void PrintOptions()
         {
             int currentOptionNumber = 0;
-            foreach(string option in optionsBeingDisplayed)
+            foreach(Commands option in commandsBeingDisplayed)
             {
-                Console.WriteLine(($"  | |    {currentOptionNumber} )  {option} ").PadRight(optionPadding) + "| |");
+                Console.WriteLine(($"  | |    {currentOptionNumber} )  {option.name} ").PadRight(optionPadding) + "| |");
                 currentOptionNumber++;
             }
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using DiabloLoD_ConsoleEdition.UserCommands;
 
 namespace DiabloLoD_ConsoleEdition.GameWorld
 {
@@ -10,6 +11,6 @@ namespace DiabloLoD_ConsoleEdition.GameWorld
         public int yCoordinate;
         public string name;
         public string description;
-        public string[] options;
+        public List<Commands> locationCommands;
     }
 }

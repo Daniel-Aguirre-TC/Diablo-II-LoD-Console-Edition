@@ -13,7 +13,8 @@ namespace DiabloLoD_ConsoleEdition.GameWorld
         public static void ChangeLocation(int xCoordinate, int yCoordinate)
         {
             currentLocation = world.LocationAt(xCoordinate, yCoordinate);
-            ConsoleHandler.NewOptionList(currentLocation.options);
+            ConsoleHandler.NewOptionList(currentLocation.locationCommands);
+            ConsoleHandler.DisplayText(currentLocation.description, true);
         }
 
     }
