@@ -190,7 +190,6 @@ namespace DiabloLoD_ConsoleEdition
             if(!reprintForInvalidSelection)
             {
                 InputHandler.GetUserInput(optionsBeingDisplayed.ToArray());
-
             }
 
 

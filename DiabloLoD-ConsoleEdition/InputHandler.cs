@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using DiabloLoD_ConsoleEdition.GameWorld;
 
 namespace DiabloLoD_ConsoleEdition
 {
@@ -21,16 +22,17 @@ namespace DiabloLoD_ConsoleEdition
                 { ConsoleHandler.InvalidOptionChosen(); }
                 foreach (string option in validOptions)
                 {
-                    if (reply == option || reply == optionCounter.ToString() )
-                    { validResponse = true; }
+                    if (reply == option || reply.ToLower() == option || reply == optionCounter.ToString() )
+                    { validResponse = true;
+                        
+                    }
                     optionCounter++;
                 }
                 if(!validResponse)
                 {
-
                     Console.WriteLine($"\n### \" {reply} \" is not a valid Selection.###\nPlease enter a valid number matching the option you wish to choose. ###.");
                     secondIncorrectAnswer = true;
-                    
+                    optionCounter = 0;
                 }
             }
             return reply;

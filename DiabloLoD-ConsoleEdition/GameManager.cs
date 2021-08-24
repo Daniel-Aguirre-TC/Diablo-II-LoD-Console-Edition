@@ -20,6 +20,7 @@ namespace DiabloLoD_ConsoleEdition
             world = WorldFactory.CreateWorld();
             LocationHandler.ChangeLocation(0, 0);
             ConsoleHandler.DisplayText(LocationHandler.currentLocation.description, false);
+            LocationHandler.ChangeLocation(1, 0);
         }
 
 
