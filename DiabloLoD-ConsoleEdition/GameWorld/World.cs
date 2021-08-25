@@ -9,6 +9,7 @@ namespace DiabloLoD_ConsoleEdition.GameWorld
     {
         private List<Location> locations = new List<Location>();
 
+
         public void AddLocation(int xCoordinate, int yCoordinate, string name, string description, List<Commands> commands)
         {
             Location location = new Location();
