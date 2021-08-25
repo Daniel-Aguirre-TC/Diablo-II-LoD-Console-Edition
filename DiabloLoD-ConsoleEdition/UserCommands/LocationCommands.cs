@@ -27,5 +27,8 @@ namespace DiabloLoD_ConsoleEdition.UserCommands
             listAddingTo.Add(commandAdding);
         }
 
+
+        //public static void CloneList(List<Commands> listToClone)
+
     }
 }

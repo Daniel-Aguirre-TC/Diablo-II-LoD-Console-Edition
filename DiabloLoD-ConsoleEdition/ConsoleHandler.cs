@@ -27,8 +27,7 @@ namespace DiabloLoD_ConsoleEdition
 
         // DisplayText should be called if we are needing to print a new message to the page.
         public static void PrintNewMessage(string message, bool clearExistingMessages)
-        {
-            
+        {           
             string[] formattedMessage = FormatMessage(message, messageCharLimit);
             if(clearExistingMessages)
             { stringsBeingDisplayed.Clear(); }
@@ -39,13 +38,15 @@ namespace DiabloLoD_ConsoleEdition
 
 
         // print new options list - bool reloadPage included in case we are using this when changing location since ChangeLocation will handle reprint
-        public static void NewOptionList(List<Commands> commands, bool reloadPage)
+        public static void NewOptionList(List<Commands> newCommands, bool reloadPage)
         {
-            commandsBeingDisplayed.Clear();
-            foreach(Commands command in commands)
-            {
-                commandsBeingDisplayed.Add(command);
-            }
+
+            commandsBeingDisplayed = new List<Commands>(newCommands);
+            //commandsBeingDisplayed.Clear();
+            //foreach(Commands currentLoopedCommand in newCommands)
+            //{
+            //    commandsBeingDisplayed.Add(currentLoopedCommand);
+            //}
             if(reloadPage)
             {
                 DrawPage();
