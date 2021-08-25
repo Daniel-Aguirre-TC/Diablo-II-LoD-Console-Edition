@@ -25,8 +25,8 @@ namespace DiabloLoD_ConsoleEdition
         static bool reprintForInvalidSelection = false;
         
 
-        // DisplayText should be called from outside class when we need to draw the page, or adjust any text being shown.
-        public static void DisplayText(string message, bool clearExistingMessages)
+        // DisplayText should be called if we are needing to print a new message to the page.
+        public static void PrintNewMessage(string message, bool clearExistingMessages)
         {
             
             string[] formattedMessage = FormatMessage(message, messageCharLimit);
@@ -37,38 +37,34 @@ namespace DiabloLoD_ConsoleEdition
             
         }
 
-        public static void InvalidOptionChosen()
-        {
-            reprintForInvalidSelection = true;
-            DisplayText();
-            reprintForInvalidSelection = false;
-        }
 
-        public static void DisplayText()
-        {
-            DrawPage();
-        }
-
-
-        // pass currentlocation to show the optionList for that location.
-        public static void NewOptionList(Location currentLocation)
-        {
-            NewOptionList(currentLocation.locationCommands);
-        }
-        // provide options directly
-        public static void NewOptionList(List<Commands> commands)
+        // print new options list - bool reloadPage included in case we are using this when changing location since ChangeLocation will handle reprint
+        public static void NewOptionList(List<Commands> commands, bool reloadPage)
         {
             commandsBeingDisplayed.Clear();
             foreach(Commands command in commands)
             {
                 commandsBeingDisplayed.Add(command);
             }
+            if(reloadPage)
+            {
+                DrawPage();
+            }
+            
         }
 
         static void AddMsgToDisplayList(string[] messages)
         {
             foreach(string message in messages)
             {
+
+                for(int i = stringsBeingDisplayed.Count - 1; i >= 0; i--)
+                {
+                    if (stringsBeingDisplayed[i] == PadUntilThenColumn("", messagePadding))
+                    {
+                        stringsBeingDisplayed.Remove(stringsBeingDisplayed[i]);
+                    }
+                }
                 // if at maxMessagesShown
                 if(stringsBeingDisplayed.Count == maxMessagesShown)
                 {
@@ -79,55 +75,8 @@ namespace DiabloLoD_ConsoleEdition
                 stringsBeingDisplayed.Add(PadUntilThenColumn(message, messagePadding));
             }
         }
-        public static string GetPlayerName()
-        {
-            Console.WriteLine("We will start by creating your player. In later versions I may add classes but for now we'll keep\nit simple. Please enter your charaters name:\n");
-            string playerName = Console.ReadLine();
-            Console.WriteLine($"\nYou have entered the name: {playerName}");
-            ClearAfterReadKey();
-            return playerName;
-        }
-        public static void GreetUser()
-        {
-            Console.WriteLine("Thank you for taking the time to play my Console Edition of one of the best games of all time.\n\nDiablo II - Lord of Destruction\n\n");
-        }
-        public static void ClearAfterReadKey()
-        {
-            Console.ReadKey();
-            Console.Clear();
-        }
-        public static void ShowLogo()
-        {
-            string spacing = "                                     ";
-            // Logo, cause why not?
-
-            Console.WriteLine("\n\n\n\n\n\n\n\n\n\n\n\n");
-            Console.WriteLine($"{spacing}   ______    ______   ____ ");
-            Console.WriteLine($"{spacing}   |    |    |       |    \\");
-            Console.WriteLine($"{spacing}   |    |    |       |     \\");
-            Console.WriteLine($"{spacing}   ------    |-----  |     |");
-            Console.WriteLine($"{spacing}   |     \\   |       |     |");
-            Console.WriteLine($"{spacing}   |      \\  |_____  |_____|\n");
-
-            Console.WriteLine($"{spacing}______    ______   _____   _     ");
-            Console.WriteLine($"{spacing}|    |    |     |    |    | \\   |");
-            Console.WriteLine($"{spacing}|    |    |     |    |    |  \\  |");
-            Console.WriteLine($"{spacing}------    |-----|    |    |   \\ |");
-            Console.WriteLine($"{spacing}|     \\   |     |    |    |    \\|");
-            Console.WriteLine($"{spacing}|      \\  |     |  __|__  |     |");
-
-            // will say press any key to begin or exit depending on if starting or ending game.
-            string beginOrExit = GameManager.isPlaying ? "Begin" : "Exit";
-            Console.Write($"\n\n{spacing}    Press Any Key To {beginOrExit}.");
-            ClearAfterReadKey();
-        }
-        public static string PadUntilThenColumn(string stringToPad, int indexToPadTo)
-        {
-            while (stringToPad.Length < indexToPadTo)
-            { stringToPad += " "; }
-            return stringToPad + "| |";
-        }
-        
+  
+        // prints the page, should only be called by methods inside the ConsoleHandler. 
         static void DrawPage()
         {
             string playerName = PadUntilThenColumn(GameManager.player.name, namePadding);
@@ -195,18 +144,30 @@ namespace DiabloLoD_ConsoleEdition
             }
 
 
+            
         }
 
+        // PrintOptions() is nested inside of DrawPage() because it should only ever be called by this method.
         static void PrintOptions()
         {
             int currentOptionNumber = 0;
-            foreach(Commands option in commandsBeingDisplayed)
+            foreach (Commands option in commandsBeingDisplayed)
             {
                 Console.WriteLine(($"  | |    {currentOptionNumber} )  {option.name} ").PadRight(optionPadding) + "| |");
                 currentOptionNumber++;
             }
         }
-        public static string[] FormatMessage(string message, int charLimit)
+
+        // used to reprint the page if an invalid option was chosen.
+        public static void InvalidOptionChosen()
+        {
+            reprintForInvalidSelection = true;
+            DrawPage();
+            reprintForInvalidSelection = false;
+        }
+
+        // if a message is too long then this will chop it into multiple strings before displaying on the page.
+        static string[] FormatMessage(string message, int charLimit)
         {
             string stringToChop = message;
             List<string> splitMessagesToDisplay = new List<string>();
@@ -248,6 +209,55 @@ namespace DiabloLoD_ConsoleEdition
                 }
             }
             return splitMessagesToDisplay.ToArray();
+        }
+        
+        // TODO: Replace temporary method for getting player name, later on move this into the normal game UI with name, class, and class dependant stats set to ??? until values set.
+        public static string GetPlayerName()
+        {
+            Console.WriteLine("We will start by creating your player. In later versions I may add classes but for now we'll keep\nit simple. Please enter your charaters name:\n");
+            string playerName = Console.ReadLine();
+            Console.WriteLine($"\nYou have entered the name: {playerName}");
+            Console.ReadKey();
+            Console.Clear();
+            return playerName;
+        }
+        // temporary greeting
+        public static void GreetUser()
+        {
+            Console.WriteLine("Thank you for taking the time to play my Console Edition of one of the best games of all time.\n\nDiablo II - Lord of Destruction\n\n");
+        }
+
+        public static void ShowLogo()
+        {
+            string spacing = "                                     ";
+            // Logo, cause why not?
+
+            Console.WriteLine("\n\n\n\n\n\n\n\n\n\n\n\n");
+            Console.WriteLine($"{spacing}   ______    ______   ____ ");
+            Console.WriteLine($"{spacing}   |    |    |       |    \\");
+            Console.WriteLine($"{spacing}   |    |    |       |     \\");
+            Console.WriteLine($"{spacing}   ------    |-----  |     |");
+            Console.WriteLine($"{spacing}   |     \\   |       |     |");
+            Console.WriteLine($"{spacing}   |      \\  |_____  |_____|\n");
+
+            Console.WriteLine($"{spacing}______    ______   _____   _     ");
+            Console.WriteLine($"{spacing}|    |    |     |    |    | \\   |");
+            Console.WriteLine($"{spacing}|    |    |     |    |    |  \\  |");
+            Console.WriteLine($"{spacing}------    |-----|    |    |   \\ |");
+            Console.WriteLine($"{spacing}|     \\   |     |    |    |    \\|");
+            Console.WriteLine($"{spacing}|      \\  |     |  __|__  |     |");
+
+            // will say press any key to begin or exit depending on if starting or ending game.
+            string beginOrExit = GameManager.isPlaying ? "Begin" : "Exit";
+            Console.Write($"\n\n{spacing}    Press Any Key To {beginOrExit}.");
+            Console.ReadKey();
+            Console.Clear();
+        }
+        public static string PadUntilThenColumn(string stringToPad, int indexToPadTo)
+        {
+            while (stringToPad.Length < indexToPadTo)
+            { stringToPad += " "; }
+            return stringToPad + "| |";
         }
 
     }

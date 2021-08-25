@@ -11,7 +11,6 @@ namespace DiabloLoD_ConsoleEdition
 
         public static string GetUserInput(params Commands[] validOptions)
         {
-            // consoleHandler.SetUserOptions()
             string reply = "";
             bool validResponse = false;
             int optionCounter = 0;
@@ -25,8 +24,20 @@ namespace DiabloLoD_ConsoleEdition
                 {
                     if (reply == option.name || reply.ToLower() == option.name || reply == optionCounter.ToString() )
                     { validResponse = true;
-                        ConsoleHandler.NewOptionList(option.nextCommands);
-                        ConsoleHandler.DisplayText(option.messageOutput, false);
+                        switch(option.type)
+                        {
+                            // if command is for travel, then change location
+                            case Commands.CommandType.Travel:
+                                LocationHandler.ChangeLocation(option.name);
+                                break;
+                                // if command is for dialog, we will just change options and print new message.
+                            case Commands.CommandType.Dialog:
+                                // new command list, but will not reload page yet
+                                ConsoleHandler.NewOptionList(option.nextCommands, false);
+                                // print new message, now will reload page
+                                ConsoleHandler.PrintNewMessage(option.messageOutput, false);
+                                break;
+                        }
                     }
                     optionCounter++;
                 }
