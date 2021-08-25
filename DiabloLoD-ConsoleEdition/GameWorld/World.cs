@@ -18,6 +18,7 @@ namespace DiabloLoD_ConsoleEdition.GameWorld
             then we will instantiate the NPC class inside of the WorldFactory when we add the location that holds the NPC.
          
             Each location may hold multiple NPCs so I need to provide it with a List<NPC>.
+            ??? Should I consider using a dictionary for my npc list instead of a list so that I can search for the Name of npc?
 
             Then when I need to access the List of Commands, I would access location.NpcList(specificNPC).commandList ???
         

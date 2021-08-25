@@ -22,7 +22,7 @@ namespace DiabloLoD_ConsoleEdition
                 { ConsoleHandler.InvalidOptionChosen(); }
                 foreach (Commands option in validOptions)
                 {
-                    if (reply == option.name || reply.ToLower() == option.name || reply == optionCounter.ToString() )
+                    if (reply.ToLower() == option.name.ToLower() || reply == optionCounter.ToString() )
                     { validResponse = true;
                         switch(option.type)
                         {
