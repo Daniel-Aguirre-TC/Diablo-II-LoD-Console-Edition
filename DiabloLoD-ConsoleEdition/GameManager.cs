@@ -15,12 +15,27 @@ namespace DiabloLoD_ConsoleEdition
         {
             isPlaying = true;
             ConsoleHandler.ShowLogo();
-            ConsoleHandler.GreetUser();
-            player = new Player(ConsoleHandler.GetPlayerName(), Player.PlayerClass.Barbarian);
+            GreetUser();
+            player = new Player(GetPlayerName(), Player.PlayerClass.Barbarian);
             world = WorldFactory.CreateWorld();
             LocationHandler.ChangeLocation(0, 0);
         }
 
+        // TODO: Replace temporary method for getting player name, later on move this into the normal game UI with name, class, and class dependant stats set to ??? until values set.
+        public static string GetPlayerName()
+        {
+            Console.WriteLine("We will start by creating your player. In later versions I may add classes but for now we'll keep\nit simple. Please enter your charaters name:\n");
+            string playerName = Console.ReadLine();
+            Console.WriteLine($"\nYou have entered the name: {playerName}");
+            Console.ReadKey();
+            Console.Clear();
+            return playerName;
+        }
+        // temporary greeting
+        public static void GreetUser()
+        {
+            Console.WriteLine("Thank you for taking the time to play my Console Edition of one of the best games of all time.\n\nDiablo II - Lord of Destruction\n\n");
+        }
 
 
     }

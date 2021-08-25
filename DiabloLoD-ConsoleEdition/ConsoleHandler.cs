@@ -8,9 +8,11 @@ namespace DiabloLoD_ConsoleEdition
 {
     public static class ConsoleHandler
     {
+        // commands that are being shown to the player.
         static List<Commands> commandsBeingDisplayed = new List<Commands>();
+        // messages being displayed
         static List<string> stringsBeingDisplayed = new List<string>();
-        //padding values for drawing the gui
+        //padding values for drawing the ui
         static int namePadding = 24;
         static int locationPadding = 33;
         static int statPadding = 18;
@@ -21,19 +23,21 @@ namespace DiabloLoD_ConsoleEdition
         static int messageCharLimit = 49;
         // maximum number of lines that can display strings for messages.
         static int maxMessagesShown = 22;
-
+        // this bool will stop us from asking starting a new GetUserInput() when the page is reloaded for an invalid selection.
         static bool reprintForInvalidSelection = false;
         
 
-        // DisplayText should be called if we are needing to print a new message to the page.
+        // DisplayText will take a provided string, chop it to fit inside the UI, and will AddMsgToDisplayList(string[] formattedMessage) then redraw page.
+        //
         public static void PrintNewMessage(string message, bool clearExistingMessages)
         {           
             string[] formattedMessage = FormatMessage(message, messageCharLimit);
             if(clearExistingMessages)
-            { stringsBeingDisplayed.Clear(); }
+            { 
+                stringsBeingDisplayed.Clear(); 
+            }
             AddMsgToDisplayList(formattedMessage);
-            DrawPage();
-            
+            DrawPage();            
         }
 
 
@@ -143,8 +147,6 @@ namespace DiabloLoD_ConsoleEdition
             {
                 InputHandler.GetUserInput(commandsBeingDisplayed.ToArray());
             }
-
-
             
         }
 
@@ -212,22 +214,6 @@ namespace DiabloLoD_ConsoleEdition
             return splitMessagesToDisplay.ToArray();
         }
         
-        // TODO: Replace temporary method for getting player name, later on move this into the normal game UI with name, class, and class dependant stats set to ??? until values set.
-        public static string GetPlayerName()
-        {
-            Console.WriteLine("We will start by creating your player. In later versions I may add classes but for now we'll keep\nit simple. Please enter your charaters name:\n");
-            string playerName = Console.ReadLine();
-            Console.WriteLine($"\nYou have entered the name: {playerName}");
-            Console.ReadKey();
-            Console.Clear();
-            return playerName;
-        }
-        // temporary greeting
-        public static void GreetUser()
-        {
-            Console.WriteLine("Thank you for taking the time to play my Console Edition of one of the best games of all time.\n\nDiablo II - Lord of Destruction\n\n");
-        }
-
         public static void ShowLogo()
         {
             string spacing = "                                     ";
