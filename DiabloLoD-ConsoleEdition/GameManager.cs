@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using DiabloLoD_ConsoleEdition.GameWorld;
+using DiabloLoD_ConsoleEdition.UserCommands;
 
 namespace DiabloLoD_ConsoleEdition
 {
@@ -10,6 +11,7 @@ namespace DiabloLoD_ConsoleEdition
         public static Player player;
         public static bool isPlaying;
         public static World world;
+        public static CommandsLibrary commandsLibrary;
 
         public static void StartNewGame()
         {
@@ -17,7 +19,9 @@ namespace DiabloLoD_ConsoleEdition
             ConsoleHandler.ShowLogo();
             GreetUser();
             player = new Player(GetPlayerName(), Player.PlayerClass.Barbarian);
+            commandsLibrary = new CommandsLibrary();
             world = WorldFactory.CreateWorld();
+            CommandsFactory.CreateCommands(commandsLibrary);
             LocationHandler.ChangeLocation(0, 0);
         }
 

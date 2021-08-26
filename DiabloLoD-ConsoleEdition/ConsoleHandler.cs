@@ -8,6 +8,7 @@ namespace DiabloLoD_ConsoleEdition
 {
     public static class ConsoleHandler
     {
+        
         // commands that are being shown to the player.
         static List<Commands> commandsBeingDisplayed = new List<Commands>();
         // messages being displayed
@@ -27,8 +28,7 @@ namespace DiabloLoD_ConsoleEdition
         static bool reprintForInvalidSelection = false;
         
 
-        // DisplayText will take a provided string, chop it to fit inside the UI, and will AddMsgToDisplayList(string[] formattedMessage) then redraw page.
-        //
+        // PrintNewMessage will take a provided string, chop it to fit inside the UI, and will AddMsgToDisplayList(string[] formattedMessage) then redraw page.        
         public static void PrintNewMessage(string message, bool clearExistingMessages)
         {           
             string[] formattedMessage = FormatMessage(message, messageCharLimit);
@@ -40,24 +40,17 @@ namespace DiabloLoD_ConsoleEdition
             DrawPage();            
         }
 
-
         // print new options list - bool reloadPage included in case we are using this when changing location since ChangeLocation will handle reprint
         public static void NewOptionList(List<Commands> newCommands, bool reloadPage)
         {
-
             commandsBeingDisplayed = new List<Commands>(newCommands);
-            //commandsBeingDisplayed.Clear();
-            //foreach(Commands currentLoopedCommand in newCommands)
-            //{
-            //    commandsBeingDisplayed.Add(currentLoopedCommand);
-            //}
             if(reloadPage)
             {
                 DrawPage();
-            }
-            
+            }          
         }
 
+        // 
         static void AddMsgToDisplayList(string[] messages)
         {
             foreach(string message in messages)
@@ -99,6 +92,7 @@ namespace DiabloLoD_ConsoleEdition
             string coldResist = PadUntilThenColumn(GameManager.player.coldResist.ToString(), resistPadding);
             string lightResist = PadUntilThenColumn(GameManager.player.lightResist.ToString(), resistPadding);
             string poisonResist = PadUntilThenColumn(GameManager.player.poisonResist.ToString(), resistPadding);
+            
             // in not all lines are being used then add empty messages to the bottom of the list.
             while (stringsBeingDisplayed.Count < maxMessagesShown)
             {
@@ -213,6 +207,7 @@ namespace DiabloLoD_ConsoleEdition
             }
             return splitMessagesToDisplay.ToArray();
         }
+
         
         public static void ShowLogo()
         {
