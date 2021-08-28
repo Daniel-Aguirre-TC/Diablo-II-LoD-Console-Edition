@@ -130,7 +130,10 @@ namespace DiabloLoD_ConsoleEdition
             Console.WriteLine($"  | |   Lightning Resist: {lightResist}   {stringsBeingDisplayed[20]}");
             Console.WriteLine($"  | |      Poison Resist: {poisonResist}   {stringsBeingDisplayed[21]}");
             Console.WriteLine($"  |  \\______________________________/   \\_____________________________________________________/  |");
-             Console.WriteLine("  |   ________________________________________________________________________________________   |");
+            
+            // enter another box for equipped gear below the resistances.
+            
+            Console.WriteLine("  |   ________________________________________________________________________________________   |");
              Console.WriteLine("  |  /                                                                                        \\  |");
              Console.WriteLine("  | |                             Please Enter An Option Shown Below:                          | |");
             PrintOptions();
@@ -144,7 +147,7 @@ namespace DiabloLoD_ConsoleEdition
             
         }
 
-        // PrintOptions() is nested inside of DrawPage() because it should only ever be called by this method.
+        // PrintOptions() will print a new line displaying each available option for the user.
         static void PrintOptions()
         {
             int currentOptionNumber = 0;
@@ -207,8 +210,8 @@ namespace DiabloLoD_ConsoleEdition
             }
             return splitMessagesToDisplay.ToArray();
         }
-
         
+        // display logo
         public static void ShowLogo()
         {
             string spacing = "                                     ";
@@ -235,11 +238,11 @@ namespace DiabloLoD_ConsoleEdition
             Console.ReadKey();
             Console.Clear();
         }
+        
+        // return the provided string, but padded to the provided index and then with a column "| |" added.
         public static string PadUntilThenColumn(string stringToPad, int indexToPadTo)
         {
-            while (stringToPad.Length < indexToPadTo)
-            { stringToPad += " "; }
-            return stringToPad + "| |";
+            return stringToPad.PadRight(indexToPadTo) + "| |";
         }
 
     }

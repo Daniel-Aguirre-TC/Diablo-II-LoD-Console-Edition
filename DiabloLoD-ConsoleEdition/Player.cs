@@ -8,9 +8,9 @@ namespace DiabloLoD_ConsoleEdition
 
     public class Player
     {
-        public enum PlayerClass { Amazon, Assassin, Necromancer, Barbarian, Paladin, Sorceress, Druid}        
-        public string name;
-        public PlayerClass playerClass;
+        public enum PlayerClass { Amazon, Assassin, Necromancer, Barbarian, Paladin, Sorceress, Druid, NotYetSelected}        
+        public string name = "???";
+        public PlayerClass playerClass = PlayerClass.NotYetSelected;
         public int maxHealth;
         public int currentHealth;
         public int maxMana;
